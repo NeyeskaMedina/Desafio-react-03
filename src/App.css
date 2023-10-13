@@ -1,0 +1,18 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.form-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.list-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+}
