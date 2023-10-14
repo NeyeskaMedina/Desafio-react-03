@@ -1,9 +1,15 @@
-import { DataColaboradores } from './componentes/dataColaboradores';
+
 import { useState } from 'react';
+
+import { DataColaboradores } from './DataColaboradores';
+
 import Alert from './componentes/Alert';
 import Formulario from './componentes/Formulario';
 import Listado from './componentes/Listado';
 import Buscador from './componentes/Buscador';
+
+import './app.css'
+
 
 
 export const App = () => {
@@ -12,7 +18,8 @@ export const App = () => {
       const[color, setColor] = useState("")
 
       return (
-            <>
+            <main>
+                  <section className='form-data'>
                   <Alert 
                         msgAlert ={msgAlert} 
                         color = {color}
@@ -23,11 +30,17 @@ export const App = () => {
                         setMsgAlert={setMsgAlert}
                         setColor = {setColor}
                   />
+                  </section>
+                 <section className='list-data'>
                   <Buscador data={data} />
                   <Listado 
                         data ={data}
                   />
-            </>
+                 </section>
+            </main>
+                  
+                  
+           
       )
 }
 export default App;

@@ -1,8 +1,6 @@
-import React from 'react';
 import Table from 'react-bootstrap/Table';
 
 export const Listado = ({ data }) => {
-    
     return (
         <>
             <Table striped bordered hover variant="dark">
@@ -15,17 +13,19 @@ export const Listado = ({ data }) => {
                             <th>Teléfono</th>
                         </tr>
                     </thead>
-                {data.map(item => (
                     <tbody>
-                        <tr>
-                            <th>{item.nombre}</th>
-                            <th>{item.correo}</th>
-                            <th>{item.edad}</th>
-                            <th>{item.cargo}</th>
-                            <th>{item.telefono}</th>
+                {data.map(item => (
+                    
+                        <tr key={item.id}>
+                            <td>{item.nombre}</td>
+                            <td>{item.correo}</td>
+                            <td>{item.edad}</td>
+                            <td>{item.cargo}</td>
+                            <td>{item.telefono}</td>
                         </tr>
-                    </tbody>
+                    
                 ))}
+                </tbody>
             </Table>
         </>
     );
