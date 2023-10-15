@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-// import { v4 as uuid } from 'uuid';
+import  { v4 }  from 'uuid';
 
-export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
+export const Formulario = ({ data, setData, setMsgAlert, setColor, originalData, setOriginalData }) => {
   const [err, setErr] = useState(false)
   const [inputs, setInputs] = useState({nombre: "", correo: "", edad: "", cargo: "", telefono: ""})
   const handleChange = (e) =>{
@@ -53,17 +53,29 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
             setColor("alert alert-danger");
             return;
       }
-      setData([
-        ...data,
-            {
-              id: 4,
-              nombre: inputs.nombre,
-              correo: inputs.correo,
-              edad: inputs.edad,
-              cargo: inputs.cargo,
-              telefono: inputs.telefono
-            }
-          ])
+
+      const nuevoRegistro = {
+        id: v4(),
+        nombre: inputs.nombre,
+        correo: inputs.correo,
+        edad: inputs.edad,
+        cargo: inputs.cargo,
+        telefono: inputs.telefono
+      };
+
+     setData([
+      ...data,
+      nuevoRegistro
+    ]);
+   
+   
+    if (setOriginalData) {
+      setOriginalData([
+        ...originalData,
+        nuevoRegistro
+      ]);
+    }
+       
           Swal.fire({
             title: 'Excelente!',
             text:  'Excelente!, Su registro ha sido exitoso',
@@ -72,15 +84,14 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
         setErr(false);
         setMsgAlert("Excelente! Su registro ha sido exitoso");
         setColor("alert alert-success");
-        setInputs({nombre: "", correo: "", edad: "", cargo: "", telefono: ""});
-
-  }
+        setInputs({nombre: "", correo: "", edad: "", cargo: "", telefono: ""}); 
+         }
   
   return (
     <>
-    <form onSubmit={handleSubmit} className='formulario my-2' autoComplete='off'>
+    <form onSubmit={handleSubmit} className='' autoComplete='off'>
       <h1>Agregar Colaborador</h1>
-      <div className='form-group mb-4'>
+      <div className='form-group mb-4 w-75'>
           <input 
               id='inputNombre'
               name='nombre'
@@ -91,7 +102,7 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
               
           />
       </div>
-      <div className='form-group'>
+      <div className='form-group w-75'>
             <input 
                 id='inputEmail'
                 name='correo'
@@ -101,7 +112,7 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
                 value={inputs.correo}
             />
       </div>
-      <div className='form-group'>
+      <div className='form-group w-75'>
                 <input 
                     id='inputEdad'
                     name='edad'
@@ -111,7 +122,7 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
                     value={inputs.edad}
                 />
       </div>
-      <div className='form-group'>
+      <div className='form-group w-75'>
                 <input 
                     id='inputCargo'
                     name='cargo'
@@ -121,7 +132,7 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
                     value={inputs.cargo}
                 />
       </div>
-      <div className='form-group'>
+      <div className='form-group w-75'>
                 <input 
                     id='inputTelefono'
                     name='telefono'
@@ -131,7 +142,7 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
                     value={inputs.telefono}
                 />
       </div>
-      <button  className='"btn btn-primary' type="submit">
+      <button  className='"btn btn-primary w-75' type="submit">
           Agregar
       </button>
   </form>

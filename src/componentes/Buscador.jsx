@@ -1,31 +1,39 @@
-import React from 'react'
+import React, { useState } from "react";
 
-// import Listado from './Listado';
+const Buscador = ({ data, setData, originalData }) => {
+  const [busqueda, setBusqueda] = useState("");
 
-export const Buscador = ({ data }) => {
-  
-  const handleSubmitSearch = (e)=> {
-      e.preventDefault();
-      console.log(e);
-      // const filterNombre = data.filter(inpBuscar.value === data.nombre)
-        
-      }
+  const handleBusqueda = (e) => {
+    const valorBusqueda = e.target.value;
+    setBusqueda(valorBusqueda);
+
+    if (valorBusqueda === "") {
+      // Si el valor de búsqueda está vacío, restaura los datos a los originales
+      setData(originalData);
+    } else {
+      // Realiza el filtrado de datos basado en el valor de búsqueda
+      const datosFiltrados = originalData.filter((colaborador) =>
+        Object.values(colaborador)
+          .join(" ")
+          .toLowerCase()
+          .includes(valorBusqueda.toLowerCase())
+      );
+
+      setData(datosFiltrados);
+    }
+  };
 
   return (
-      <form onSubmit={handleSubmitSearch} className="form-inline my-3 d-flex w-50 align-self-start">
-          <input 
-              className="form-control mr-sm-2 w-50" 
-              type="search" 
-              placeholder="Buscar Colaborador" 
-              aria-label="Search"
-              name='inpBuscar'
-          />
-          <button 
-              className="btn btn-outline-primary my-2 my-sm-0 btnSearch" 
-              type="submit">
-                Buscar
-          </button>
-      </form>
-  )
-};
+    <div className="buscador">
+      <input
+        type="text"
+        placeholder="Buscar por nombre, correo, edad, cargo o teléfono"
+        value={busqueda}
+        onChange={handleBusqueda}
+      />
+    </div>
+  );
+
+
+
 export default Buscador;
