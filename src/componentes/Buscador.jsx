@@ -33,6 +33,7 @@ const Buscador = ({ data, setData, originalData }) => {
       />
     </div>
   );
-};
+
+
 
 export default Buscador;
