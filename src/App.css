@@ -9,10 +9,12 @@ main {
     justify-content: center;
     align-content: center;
     align-items: center;
+    padding-bottom: 10px;
 }
 .list-data {
     display: flex;
     flex-direction: column;
     justify-content: end;
+    gap:10px
 
 }

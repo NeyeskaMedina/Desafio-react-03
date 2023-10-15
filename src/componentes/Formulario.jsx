@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import  { v4 }  from 'uuid';
 
-export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
+export const Formulario = ({ data, setData, setMsgAlert, setColor, originalData, setOriginalData }) => {
   const [err, setErr] = useState(false)
   const [inputs, setInputs] = useState({nombre: "", correo: "", edad: "", cargo: "", telefono: ""})
   const handleChange = (e) =>{
@@ -53,29 +53,39 @@ export const Formulario = ({ data, setData, setMsgAlert, setColor }) => {
             setColor("alert alert-danger");
             return;
       }
-      setData([
-        ...data,
-            {
-              id: v4(),
-              nombre: inputs.nombre,
-              correo: inputs.correo,
-              edad: inputs.edad,
-              cargo: inputs.cargo,
-              telefono: inputs.telefono
-            }
-          ])
+
+      const nuevoRegistro = {
+        id: v4(),
+        nombre: inputs.nombre,
+        correo: inputs.correo,
+        edad: inputs.edad,
+        cargo: inputs.cargo,
+        telefono: inputs.telefono
+      };
+
+     setData([
+      ...data,
+      nuevoRegistro
+    ]);
+   
+   
+    if (setOriginalData) {
+      setOriginalData([
+        ...originalData,
+        nuevoRegistro
+      ]);
+    }
+       
           Swal.fire({
             title: 'Excelente!',
             text:  'Excelente!, Su registro ha sido exitoso',
             icon:  'success',
           })
-          console.log(data)
         setErr(false);
         setMsgAlert("Excelente! Su registro ha sido exitoso");
         setColor("alert alert-success");
-        setInputs({nombre: "", correo: "", edad: "", cargo: "", telefono: ""});
-
-  }
+        setInputs({nombre: "", correo: "", edad: "", cargo: "", telefono: ""}); 
+         }
   
   return (
     <>
