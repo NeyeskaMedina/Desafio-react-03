@@ -31,16 +31,16 @@ export const App = () => {
                         setColor = {setColor}
                   />
                   </section>
-                 <section className='list-data'>
-                  <Buscador data={data} />
+                  <section className='list-data'>
+                  <Buscador 
+                        data={data}
+                        setData={setData}
+                  />
                   <Listado 
                         data ={data}
                   />
-                 </section>
+                  </section>
             </main>
-                  
-                  
-           
       )
 }
 export default App;
